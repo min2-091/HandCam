@@ -33,13 +33,13 @@ while True:
             cv2.imwrite("/Users/jiminkim/Desktop/Capture/" + str(now) + ".png", frame)
         elif k == 24:
             print("최근 파일 색상 검출")
-            img_color = cv2.imread('/Users/jiminkim/Desktop/Capture/dd.png')
+            img_color = cv2.imread('/Users/jiminkim/Desktop/Capture/' + a + '.png')
             print('shape: ', img_color.shape)
             height, width = img_color.shape[:2]
             img_hsv = cv2.cvtColor(img_color, cv2.COLOR_BGR2HSV)
 
-            lower_blue = (120-10, 30, 30)
-            upper_blue = (120+10, 255, 255)
+            lower_blue = (120-10, 30, 30)#R:140 G:120 B:100
+            upper_blue = (120+10, 255, 255)#R:220 G:200 B:170
             img_mask = cv2.inRange(img_hsv, lower_blue, upper_blue)
 
             img_result = cv2.bitwise_and(img_color, img_color, mask=img_mask)
@@ -51,9 +51,9 @@ while True:
             img = cv2.imread('/Users/jiminkim/Desktop/Capture/' + a + '.png', cv2.IMREAD_COLOR)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             #모서리 검출
-            corner = cv2.cornerHarris(gray, 2, 3, 0.04)
+            corner = cv2.cornerHarris(gray, 2, 3, 0.16)
             #10% 지표구하기
-            coord = np.where(corner > 0.1 * corner.max())
+            coord = np.where(corner > 0.05 * corner.max())
             coord = np.stack((coord[1], coord[0]), axis=-1)
 
             for x, y in coord:
