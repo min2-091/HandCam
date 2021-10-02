@@ -46,6 +46,8 @@ while True:
             cv2.imshow('img_origin', img_color)
             cv2.imshow('img_mask', img_mask)
             cv2.imshow('img_color', img_result)
+            cv2.waitKey()
+            cv2.destroyAllWindows()
         elif k == 3:
             print("최근 파일 모서리 검출")
             img = cv2.imread('/Users/jiminkim/Desktop/Capture/' + a + '.png', cv2.IMREAD_COLOR)
